@@ -1,0 +1,220 @@
+<div class="container c-alt" ng-controller="admSummaryCtrl"
+	data-ng-init="load()">
+	<div class="block-header">
+		<h2>
+			Search Summary <small>Results available for - criteria.</small>
+		</h2>
+
+		<ul class="actions">
+			<li><a href=""> <i class="zmdi zmdi-trending-up"></i>
+			</a></li>
+			<li><a href=""> <i class="zmdi zmdi-check-all"></i>
+			</a></li>
+			<li class="dropdown" uib-dropdown><a href="" uib-dropdown-toggle>
+					<i class="zmdi zmdi-more-vert"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-menu-right">
+					<li><a href="">Refresh</a></li>
+					<li><a href="">Manage Widgets</a></li>
+					<li><a href="">Widgets Settings</a></li>
+				</ul></li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card wall-posting">
+				<div class="card-body card-padding">
+					<!-- <div class="card-header">
+						<h3>Result Count</h3>
+					</div> -->
+				</div>
+				<ul class="list-unstyled clearfix wpb-actions">
+					<li class="wpba-attrs">
+						<ul class="list-unstyled list-inline m-l-0 m-t-5">
+							<li ng-if="smyOpts.smyGrid">View Grid</li>
+							<li ng-if="smyOpts.smyList">View List</li>
+							<li ng-if="smyOpts.smyLocation">View Location</li>
+
+						</ul>
+					</li>
+
+					<li class="wpba-attrs pull-right">
+						<ul class="list-unstyled list-inline m-l-0 m-t-5">
+							<li><a data-wpba="image" href=""
+								data-ng-class="{ 'active': smyOpts.smyGrid }"
+								data-ng-click="smyOpts.smyGrid = true; smyOpts.smyList = false; smyOpts.smyLocation = false"><i
+									class="zmdi zmdi-apps"></i></a></li>
+
+							<li><a data-wpba="video" href=""
+								data-ng-class="{ 'active': smyOpts.smyList }"
+								data-ng-click="smyOpts.smyGrid = false; smyOpts.smyList = true; smyOpts.smyLocation = false"><i
+									class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></a></li>
+
+							<li><a data-wpba="link" href=""
+								data-ng-class="{ 'active': smyOpts.Location }"
+								data-ng-click="smyOpts.smyGrid = false; smyOpts.smyList = false; smyOpts.smyLocation = true;"><i
+									class="zmdi zmdi-pin-drop zmdi-hc-fw"></i></a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<div class="panel panel-white post panel-shadow" ng-repeat="school in (filteredItems = (schools | filter:{board:filterBoard ,state:filterState,city:filterCity}|filter:byFees(sliderRange.nouisliderFrom,sliderRange.nouisliderTo)))" ng-init="outerIndex = $index" id="panel_body">
+            <div class="post-heading">
+                <div class="pull-left image">
+                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                </div>
+                <div class="pull-left meta">
+                    <div class="title h5">
+                        <a href="#"><b>{{school.name}}</b></a>
+                        made a post.
+                    </div>
+                    <h6 class="text-muted time">{{school.city}}, {{school.state}}</h6>
+                </div>
+            </div> 
+            <div class="post-description"> 
+                <p>{{school.description}}</p>
+                <div class="stats">
+                    <span class="btn btn-default stat-item" ng-click="schoolLikesCounter(school.id)" >
+                        <i class="fa fa-thumbs-up icon"></i>{{school.likes}}
+                    </span>
+                    <span class="btn btn-default stat-item" ng-click="schoolShareCounter(school.id)">
+                        <i class="fa fa-share icon"></i>{{school.share}}
+                    </span>
+                    <span class="btn btn-default stat-item">
+                        <i class="fa fa-comment icon"></i>{{school.totalComments}}
+                    </span>
+                </div>
+            </div>
+            <div class="post-footer">
+                <div class="input-group"> 
+                    <input class="form-control" placeholder="{{somePlaceholder}}" ng-model="school.reviews.comment"  type="text"><br>
+                    <input class="form-control" placeholder="Name" ng-model="school.reviews.author" type="text">
+                    <!--<h4 class="user">{{comment}}</h4>-->
+                   <button ng-click="addReview(school.id,school)">Comment!</button>
+                   <span class="input-group-addon">
+                        <a href="#"><i class="fa fa-edit"></i></a>  
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                        <a class="pull-left" href="#">
+                            <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
+                        </a>
+                        <div class="comment-body"  ng-repeat="rev in school.reviews">
+                            <div class="comment-heading">
+                                <h4 class="user">{{rev.author}}</h4>
+                                <h5 class="time">{{rev.timer}} seconds ago</h5>
+                            </div>
+                            <p><span>{{rev.comment}}</span><br><img src="img/like_dislike/like.png" ng-click="likesCounter(school.id,$index)">{{rev.likes}} &nbsp &nbsp<img src="img/like_dislike/dislike.png" ng-click="dislikesCounter(school.id,$index)">{{rev.dislikes}}</p>
+
+                        </div>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+				
+
+			<div class="load-more">
+				<button ng-click="testLoad()"><i class="zmdi zmdi-refresh-alt"></i> Load More...</button>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+		<div class="col-md-4 hidden-sm">
+
+			<div class="card">
+				<div class="card-header ch-alt">
+					<h2>
+						Filter Results
+						<!--                  <small>Criteria filter</small> -->
+					</h2>
+				</div>
+
+				<div class="card-body card-padding">
+					<div class="form-group fg-float m-b-30">
+						<div class="fg-line">
+							<input type="text" class="form-control input-sm" ng-model="filterBoard"> <label
+								class="fg-label">Affiliated Board</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body card-padding">
+					<div class="form-group fg-float m-b-30">
+						<div class="fg-line">
+							<input type="text" class="form-control input-sm" ng-model="filterState"> <label
+								class="fg-label">State</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body card-padding">
+					<div class="form-group fg-float m-b-30">
+						<div class="fg-line">
+							<input type="text" class="form-control input-sm" ng-model="filterCity"> <label
+								class="fg-label">City</label>
+						</div>
+					</div>
+				</div>
+				<div class="card-header">
+					<h2>
+						Fees <small class="c-gray">Current value: {{
+							sliderRange.nouisliderFrom }} - {{ sliderRange.nouisliderTo }}</small>
+					</h2>
+				</div>
+
+				<div class="card-body card-padding">
+
+					<div slider class="input-slider-range" data-is-color="green"
+						ng-from="sliderRange.nouisliderFrom"
+						ng-to="sliderRange.nouisliderTo" start=0 end=100></div>
+				</div>
+
+			</div>
+
+
+
+
+			<!-- <div class="card">
+				<div class="card-body card-padding">
+					<button class="btn btn-info pull-right">Submit</button>
+					<button class="btn btn-info pull-right">Reset</button>
+				</div>
+			</div> -->
+
+
+
+
+
+		</div>
+	</div>
+</div>

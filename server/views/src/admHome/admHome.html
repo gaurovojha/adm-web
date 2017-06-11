@@ -1,0 +1,178 @@
+    <header id="header" data-current-skin={{mactrl.currentSkin}}
+	data-ng-include="'./template/header.html'"
+	data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="edukone-home">
+	<section id="content">
+		<div class="container">
+			<div data-ng-controller="CarouselDemoCtrl">
+				<uib-carousel interval="myInterval"> <uib-slide
+					ng-repeat="w in slides" active="slide.active"> <img
+					ng-src="./media/carousel/{{w.img}}"> <!-- <div class="carousel-caption" data-ng-if="w.title.length > 0">
+				<h3>{{w.title}}</h3>
+				<p>{{w.text}}</p>
+			</div> --> </uib-slide> </uib-carousel>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body card-padding" data-ng-controller="admHomeCtrl">
+				<tabset justified="true"> <tab ng-repeat="tab in tabs"
+					heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+				<div class="card-body card-padding">
+					<form role="form" >
+						<div class="row">
+							<!-- <div class="col-sm-8">
+								<div class="input-group">
+									<span class="input-group-addon"></span>
+									<div class="fg-line">
+										<input type="text" class="form-control" placeholder="tip: search by college/school"> 
+									</div>
+								</div>
+							</div> -->
+							<div class="col-sm-8">
+								<div class="form-group fg-line">
+									<label>College/School</label> <input type="text"
+										class="form-control" 
+										ng-model="user.addCollege"
+                                        placeholder="type college/school"
+                                        >
+
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group fg-line">
+									<label>City/States</label> <input type="text"  ng-model="user.addLocation"
+											placeholder="Enter your Location"
+								            uib-typeahead="address for address in getLocation($viewValue)"
+											typeahead-loading="loadingLocations" class="form-control">
+
+								</div>
+								<!-- <div class="input-group">
+									<div class="fg-line">
+										<input type="text" ng-model="asyncSelected"
+											placeholder="type your location"
+											uib-typeahead="address for address in getLocation($viewValue)"
+											typeahead-loading="loadingLocations" class="form-control">
+									</div>
+								</div> -->
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<button type="submit" ng-click="addCollegeAndLocation(user)"
+									class="btn bgm-cyan waves-effect pull-right">
+									<i class="zmdi zmdi-search"></i>&nbsp; &nbsp; search
+								</button>
+							</div>
+						</div>
+						<div class="row">
+						<div class="card">
+                <div class="main-title centered ">
+                    <h2 class="capital">
+                        <span class="line"><span class="dot"></span></span><strong>Quick </strong>Search
+                    </h2>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row quick-search-box">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img11.jpg" alt="Residential school">
+                                <img class="img-responsive web-view-s" src="img/img11.jpg" alt="Residential school">
+                                <img class="img-responsive tab-view" src="img/img11.jpg" alt="Residential school">
+                                <img class="img-responsive mobile-view" src="img/img11.jpg" alt="Residential school">
+                                <div class="overlay">
+                                    <h2>Residential Schools</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + 'best-residential-schools/' + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-')+'/';">click here</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img1.jpg" alt="day schools">
+                                <img class="img-responsive web-view-s" src="img/img1.jpg" alt="day schools">
+                                <img class="img-responsive tab-view" src="img/img1.jpg" alt="day schools">
+                                <img class="img-responsive mobile-view" src="img/img1.jpg" alt="justdakhila day schools">
+                                <div class="overlay">
+                                    <h2>Day Schools</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + 'best-day-schools/' + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-')+'/';">click here</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img3.jpg" alt="play schools">
+                                <img class="img-responsive web-view-s" src="img/img3.jpg" alt="play schools">
+                                <img class="img-responsive tab-view" src="img/img3.jpg" alt="play schools">
+                                <img class="img-responsive mobile-view" src="img/img3.jpg" alt="justdakhila play schools">
+                                <div class="overlay">
+                                    <h2>Play Schools</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + 'best-play-schools/' + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-');">click here</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img7.jpg" alt="school admission alerts">
+                                <img class="img-responsive web-view-s" src="img/img7.jpg" alt="justdakhila admission alert">
+                                <img class="img-responsive tab-view" src="img/img7.jpg" alt="justdakhila admission alert">
+                                <img class="img-responsive mobile-view" src="img/img7.jpg" alt="justdakhila admission alert">
+                                <div class="overlay">
+                                    <h2>Admission Alerts</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + 'school-admission-alerts/' + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-')+'/';">click here</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img5.jpg" alt="exclusive-offers">
+                                <img class="img-responsive web-view-s" src="img/img5.jpg" alt="offers">
+                                <img class="img-responsive tab-view" src="img/img5.jpg" alt="offer">
+                                <img class="img-responsive mobile-view" src="img/img5.jpg" alt="offers1">
+                                <div class="overlay">
+                                    <h2>School Exclusive Offers</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-')+'/offers';">click here</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <div class="hovereffect">
+                                <img class="img-responsive web-view" src="img/img5.jpg" alt="exclusive-offers">
+                                <img class="img-responsive web-view-s" src="img/img5.jpg" alt="offers">
+                                <img class="img-responsive tab-view" src="img/img5.jpg" alt="offer">
+                                <img class="img-responsive mobile-view" src="img/img5.jpg" alt="offers1">
+                                <div class="overlay">
+                                    <h2>School Events</h2>
+                                    <a class="info" onclick="javascript:window.location.href= RootPath + $('#ddlMasterCity option:selected').text().toLowerCase().replace(' ','-')+'/events';">Click here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+		</div>
+
+						</div>
+					</form>
+				</div>
+				</tab> </tabset>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="card"></div>
+			<div class="card">
+
+				<a ui-sref="edukone.admSummary"> TO SUMMARY </a>
+			</div>
+		</div>
+	</section>
+</section>
+
+<footer id="footer"
+	data-ng-include="'./template/footer.html'"></footer>
